@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<head>
+  <link href="css/tailwind.min.css" rel="stylesheet">
+  <style>
+    body {
+      display: flex;
+      width: 350px;
+    }
+    h1 {
+      font-family: "Monument extended", sans-serif;
+    }
+    .container {
+      background-color: white
+    }
+    .float-label-input {
+      margin: 10px 0;
+    }
+    .float-label-input:focus-within label,
+    .float-label-input input:not(:placeholder-shown) + label {
+      transform: translateY(-1.5rem) scale(0.75);
+      background-color: white;
+    }
+  </style>
+</head>
+<div class="container m-auto p-9">
+  <h1 class="text-center text-xl">Share Now Playing</h1>
+
+  <div class="relative float-label-input">
+    <input id="api-endpoint" type="text" placeholder=" " class="block bg-white w-full focus:outline-none focus:shadow-outline border border-green-500 rounded-md py-3 px-3 block appearance-none leading-normal" value="API ENDPOINT">
+    <label class="absolute top-3 left-0 text-green-500 pointer-events-none transition duration-200 ease-in-outbg-white px-2">API Endpoint</label>
+  </div>
+
+  <div class="relative float-label-input">
+    <input id="api-key" type="text" placeholder=" " class="block bg-white w-full focus:outline-none focus:shadow-outline border border-green-500 rounded-md py-3 px-3 block appearance-none leading-normal" value="APIKEY">
+    <label class="absolute top-3 left-0 text-green-500 pointer-events-none transition duration-200 ease-in-outbg-white px-2">API Key</label>
+  </div>
+  
+  <button id="save" class="rounded border border-purple-500 bg-gradient-to-r from-purple-600 to-purple-900 hover:border-purple-900 py-3 px-9 w-full text-white">Save Settings</button>
+  <h3 id="status" class="text-center text-m"></h3>
+</div>
+<script src="popup.js"></script>

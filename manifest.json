@@ -1,0 +1,25 @@
+{
+  "name": "Share Now Playing",
+  "version": "1.0",
+  "manifest_version": 3,
+  "action": {"default_popup": "popup.html"},
+  "content_scripts": [
+    {
+      "matches": ["https://*.youtube.com/watch*"],
+      "js": ["content-script.js"]
+    }
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "description": "Share now playing song.",
+  "host_permissions": [ 
+    "https://*/*",
+    "<all_urls>"
+  ],
+  "permissions": [ 
+    "tabs",
+    "activeTab",
+    "storage"
+  ]
+}

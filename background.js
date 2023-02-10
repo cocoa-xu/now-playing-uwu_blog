@@ -1,9 +1,11 @@
 chrome.runtime.onMessage.addListener((message, _sender, _resp) => {
   chrome.storage.sync.get({
     apikey: '',
-    endpoint: ''
+    endpoint: '',
+    share: true
   }, (items) => {
-    if (((typeof items.apikey === 'string' || items.apikey instanceof String) && items.apikey.length > 0) &&
+    if (items.share === true &&
+        ((typeof items.apikey === 'string' || items.apikey instanceof String) && items.apikey.length > 0) &&
         ((typeof items.endpoint === 'string' || items.endpoint instanceof String) && items.endpoint.length > 0)) {
       const resp = fetch(items.endpoint, {
         method: 'POST',

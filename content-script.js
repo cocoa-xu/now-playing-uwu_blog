@@ -32,10 +32,10 @@ const observeUrlChange = () => {
 
               if (video !== undefined) {
                 if (oldPlayer !== undefined) {
-                  oldPlayer.removeEventListener('progress', handleProgressEvent)
+                  oldPlayer.removeEventListener('timeupdate', handleProgressEvent)
                 }
                 oldPlaying = playing
-                video.addEventListener('progress', handleProgressEvent)
+                video.addEventListener('timeupdate', handleProgressEvent)
               }
 
               oldPlayer = video

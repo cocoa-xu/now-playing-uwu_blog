@@ -2,20 +2,26 @@ const observeUrlChange = () => {
   let oldHref = ''
   let oldPlaying = ''
   let oldPlayer = undefined
+  let oldTime = -1
 
   const handleProgressEvent = (event) => {
-    let title = 'unknown'
-    try {
-      title = document.querySelector("#title>h1>yt-formatted-string").innerHTML
-    } catch (error) {}
+    if (event.target.currentTime - oldTime > 1 || event.target.currentTime < oldTime) {
+      let title = 'unknown'
 
-    chrome.runtime.sendMessage({
-      type: 'youtube',
-      data: oldPlaying,
-      current_time: event.target.currentTime,
-      duration: event.target.duration,
-      title: title
-    }, (resp) => {})
+      try {
+        title = document.querySelector("#title>h1>yt-formatted-string").innerHTML
+      } catch (error) {}
+  
+      chrome.runtime.sendMessage({
+        type: 'youtube',
+        data: oldPlaying,
+        current_time: event.target.currentTime,
+        duration: event.target.duration,
+        title: title
+      }, (resp) => {})
+
+      oldTime = event.target.currentTime
+    }
   }
 
   const body = document.querySelector("body")

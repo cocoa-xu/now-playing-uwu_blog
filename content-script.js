@@ -2,14 +2,8 @@ const observeUrlChange = () => {
   let oldHref = ''
   let oldPlaying = ''
   let oldPlayer = undefined
-  let oldTime = -1
 
   const handleTimeUpdateEvent = (event) => {
-    if (event.target.currentTime - oldTime < 1 ||
-        event.target.currentTime > oldTime) {
-      return
-    }
-
     let title = 'unknown'
 
     try {
@@ -23,8 +17,6 @@ const observeUrlChange = () => {
       duration: event.target.duration,
       title: title
     }, (resp) => {})
-
-    oldTime = event.target.currentTime
   }
 
   const body = document.querySelector("body")
@@ -34,7 +26,6 @@ const observeUrlChange = () => {
         return
       }
 
-      oldHref = document.location.href
       const url = new URL(document.location.href)
       if (url === undefined ||
           url.hostname !== 'www.youtube.com' ||
@@ -47,6 +38,7 @@ const observeUrlChange = () => {
         return
       }
 
+      oldHref = document.location.href
       let video = document.querySelector('video')
       if (video !== undefined) {
         if (oldPlayer !== undefined) {
